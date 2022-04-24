@@ -47,7 +47,7 @@ public class Tests {
     })
 
     @ParameterizedTest(name = "Проверка поиска в Перекрестке по слову {0}, результат {1}")
-    void perekSearchTest2(String testData, String expectedResult) {
+    void perekSearchTest1(String testData, String expectedResult) {
 
         $("[name=search]").setValue(testData);
         $("button[type=submit]").click();
@@ -55,16 +55,16 @@ public class Tests {
                 .shouldHave(text(expectedResult));
     }
 
-    static Stream<Arguments> perekSearchTest3() {
+    static Stream<Arguments> perekSearchTest2() {
         return Stream.of(
                 Arguments.of("Огурцы", List.of("150","500")),
                 Arguments.of("Помидоры", List.of("100","300"))
         );
     }
 
-    @MethodSource("perekSearchTest3")
+    @MethodSource("perekSearchTest2")
     @ParameterizedTest(name = "Проверка фильтра по цене в Перекрестке")
-    void perekSearchTest3(String name, List<String> priceLim) {
+    void perekSearchTest2(String name, List<String> priceLim) {
         $("[name=search]").setValue(name);
         $("button[type=submit]").click();
         $(" .catalog-price-filter__value-container input[aria-label='Минимальная цена']").sendKeys(Keys.CONTROL + "A");
